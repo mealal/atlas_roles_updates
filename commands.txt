@@ -1,0 +1,29 @@
+## Create admin role
+curl --user '{public_key}:{private_key}' --digest --header 'Content-Type: application/json' --include --request POST "https://cloud.mongodb.com/api/atlas/v1.0/groups/5e8de3e1042f5b33ab81f33a/customDBRoles/roles" --data @admin_role.json
+
+## Create admin user
+curl --user '{public_key}:{private_key}' --digest --header "Accept: application/json" --header "Content-Type: application/json" --include --request POST "https://cloud.mongodb.com/api/atlas/v1.0/groups/5e8de3e1042f5b33ab81f33a/databaseUsers" --data @admin.json
+
+## Shard collection test1
+mongosh "mongodb+srv://xxxx.xxxx.mongodb.net" --username test_admin --password test_123 --quiet --eval 'sh.enableSharding("test");sh.shardCollection("test.test1", {_id:1});'
+
+## Create user role
+curl --user '{public_key}:{private_key}' --digest --header 'Content-Type: application/json' --include --request POST "https://cloud.mongodb.com/api/atlas/v1.0/groups/5e8de3e1042f5b33ab81f33a/customDBRoles/roles" --data @user_role.json
+
+## Create user
+curl --user '{public_key}:{private_key}' --digest --header "Accept: application/json" --header "Content-Type: application/json" --include --request POST "https://cloud.mongodb.com/api/atlas/v1.0/groups/5e8de3e1042f5b33ab81f33a/databaseUsers" --data @user.json
+
+## Test insert success
+mongosh "mongodb+srv://xxxx.xxxx.mongodb.net" --username test_user --password test_456 --quiet --eval 'db.getSiblingDB("test").getCollection("test1").insertOne({_id:1})'
+
+## Test insert fail
+mongosh "mongodb+srv://xxxx.xxxx.mongodb.net" --username test_user --password test_456 --quiet --eval 'db.getSiblingDB("test").getCollection("test2").insertOne({_id:1})'
+
+## Shard collection test2
+mongosh "mongodb+srv://xxxx.xxxx.mongodb.net" --username test_admin --password test_123 --quiet --eval 'sh.shardCollection("test.test2", {_id:1});'
+
+## Update user role
+curl --user '{public_key}:{private_key}' --digest --header 'Content-Type: application/json' --include --request PATCH "https://cloud.mongodb.com/api/atlas/v1.0/groups/5e8de3e1042f5b33ab81f33a/customDBRoles/roles/db_user" --data @user_role2.json
+
+## Test insert success
+mongosh "mongodb+srv://xxxx.xxxx.mongodb.net" --username test_user --password test_456 --quiet --eval 'db.getSiblingDB("test").getCollection("test2").insertOne({_id:1})'

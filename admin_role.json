@@ -1,0 +1,9 @@
+{
+    "inheritedRoles": [
+        {
+            "db": "admin",
+            "role": "enableSharding"
+        }
+    ],
+    "roleName": "db_admin"
+}

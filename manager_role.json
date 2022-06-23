@@ -1,0 +1,22 @@
+{
+   "actions" : [ {
+     "action" : "CONN_POOL_STATS",
+     "resources" : [ {
+       "cluster" : true
+     } ]
+   }, {
+     "action" : "COLL_STATS",
+     "resources" : [ {
+       "collection" : "",
+       "db" : "staging"
+     } ]
+   } ],
+   "inheritedRoles" : [ {
+     "db" : "admin",
+     "role" : "enableSharding"
+   }, {
+     "db" : "admin",
+     "role" : "backup"
+   } ],
+   "roleName" : "ShardingAdmin"
+}'

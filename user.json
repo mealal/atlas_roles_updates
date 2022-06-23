@@ -1,0 +1,11 @@
+{
+    "databaseName": "admin",
+    "password": "test_456",
+    "roles": [
+        {
+            "databaseName": "admin",
+            "roleName": "db_user"
+        }
+    ],
+    "username": "test_user"
+}

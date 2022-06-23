@@ -1,0 +1,41 @@
+{
+    "actions": [
+        {
+            "action": "FIND",
+            "resources": [
+                {
+                    "collection": "test1",
+                    "db": "test"
+                }
+            ]
+        },
+        {
+            "action": "INSERT",
+            "resources": [
+                {
+                    "collection": "test1",
+                    "db": "test"
+                }
+            ]
+        },
+        {
+            "action": "REMOVE",
+            "resources": [
+                {
+                    "collection": "test1",
+                    "db": "test"
+                }
+            ]
+        },
+        {
+            "action": "UPDATE",
+            "resources": [
+                {
+                    "collection": "test1",
+                    "db": "test"
+                }
+            ]
+        }
+    ],
+    "roleName": "db_user"
+}
